@@ -1,0 +1,23 @@
+language: python
+sudo: false
+python:
+- '2.7'
+- '3.4'
+- '3.5'
+- '3.6'
+install:
+- pip install -r requirements-travis.txt
+script:
+- tox
+after_success:
+- coverage combine test
+- coveralls
+deploy:
+  provider: pypi
+  user: justanr
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
+    repo: justanr/flask-allows
+    python: '3.6'
+    branch: master

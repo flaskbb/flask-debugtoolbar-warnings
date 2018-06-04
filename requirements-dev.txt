@@ -1,0 +1,4 @@
+flask>=0.12.0
+flask-debugtoolbar>=0.10.0
+tox>=3.0.0
+bumpversion>=0.5.3
