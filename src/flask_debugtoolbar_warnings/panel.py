@@ -11,6 +11,8 @@
 import jinja2
 from flask_debugtoolbar.panels import DebugPanel
 
+from .warnings_manager import WarningsStorage, monkeypatch_warnings
+
 
 class WarningsPanel(DebugPanel):
     name = "Warnings"
@@ -32,13 +34,13 @@ class WarningsPanel(DebugPanel):
 
     @property
     def has_content(self):
-        return True
+         return bool(WarningsStorage.count())
 
     def nav_title(self):
         return "Warnings"
 
     def nav_subtitle(self):
-        count = 0
+        count = WarningsStorage.count()
         title = "Warning" if 0 < count < 2 else "Warnings"
         return "{} {}".format(count, title)
 
@@ -49,10 +51,10 @@ class WarningsPanel(DebugPanel):
         return ""
 
     def content(self):
-        self.render("debug_tb_warnings/warnings-panel.html", context={})
+        warnings = WarningsStorage.pop_all()
+        return self.render(
+            "debug_tb_warnings/warnings-panel.html", {"warnings": warnings}
+        )
 
     def process_request(self, request):
-        pass
-
-    def process_response(self, request, response):
-        pass
+        monkeypatch_warnings()

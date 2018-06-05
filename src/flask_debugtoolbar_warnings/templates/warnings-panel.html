@@ -1,0 +1,26 @@
+<table class="tablesorter">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Filename</th>
+      <th>Line</th>
+      <th>Message</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for warning in warnings %}
+      <tr class="{{ loop.cycle('flDebugOdd', 'flDebugEven') }}">
+        <td>{{ warning._category_name }}</td>
+        <td>{{ warning.filename }}</td>
+        <td>{{ warning.lineno }}</td>
+        <td><pre>{{ warning.message }}</pre></td>
+        {% if warnings.source %}
+        <td><pre>{{ warning.source }}</pre></td>
+        {% else %}
+        <td><pre>No source available</pre></td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
