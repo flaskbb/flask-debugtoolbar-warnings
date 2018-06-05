@@ -18,6 +18,6 @@ deploy:
   distributions: sdist bdist_wheel
   on:
     tags: true
-    repo: justanr/flask-allows
+    repo: flaskbb/flask-debugtoolbar-warnings
     python: '3.6'
     branch: master
