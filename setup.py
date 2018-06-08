@@ -11,8 +11,8 @@ if __name__ == "__main__":
     setup(
         name="flask-debugtoolbar-warnings",
         version="0.0.1.dev",
-        author="FlaskBB Team",
-        author_email="uh not sure",
+        author="Alec Nikolas Reiter",
+        author_email="alecreiter@gmail.com",
         description="Adds warnings support to Flask-Debugtoolbar",
         long_description=readme + "\n\n" + changelog,
         license="MIT",
