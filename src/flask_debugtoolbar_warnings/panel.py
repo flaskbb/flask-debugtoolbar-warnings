@@ -8,6 +8,8 @@
     :license: MIT, see LICENSE for more details
 """
 
+import os
+
 import jinja2
 from flask_debugtoolbar.panels import DebugPanel
 
@@ -19,22 +21,14 @@ class WarningsPanel(DebugPanel):
 
     def __init__(self, *args, **kwargs):
         super(WarningsPanel, self).__init__(*args, **kwargs)
-        self.jinja_env.loader = jinja2.ChoiceLoader(
-            [
-                self.jinja_env.loader,
-                jinja2.PrefixLoader(
-                    {
-                        "debug_tb_warnings": jinja2.PackageLoader(
-                            __name__, "templates"
-                        )
-                    }
-                ),
-            ]
+        module_path = os.path.join(os.path.dirname(__file__), "templates")
+        self.jinja_env = jinja2.Environment(
+            loader=jinja2.FileSystemLoader(module_path)
         )
 
     @property
     def has_content(self):
-         return bool(WarningsStorage.count())
+        return bool(WarningsStorage.count())
 
     def nav_title(self):
         return "Warnings"
@@ -53,7 +47,7 @@ class WarningsPanel(DebugPanel):
     def content(self):
         warnings = WarningsStorage.pop_all()
         return self.render(
-            "debug_tb_warnings/warnings-panel.html", {"warnings": warnings}
+            "warnings-panel.html", {"warnings": warnings}
         )
 
     def process_request(self, request):
