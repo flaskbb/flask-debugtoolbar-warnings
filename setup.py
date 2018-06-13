@@ -10,7 +10,7 @@ with open("CHANGELOG", "r") as f:
 if __name__ == "__main__":
     setup(
         name="flask-debugtoolbar-warnings",
-        version="0.0.1.dev5",
+        version="0.1.0",
         author="Alec Nikolas Reiter",
         author_email="alecreiter@gmail.com",
         description="Adds warnings support to Flask-Debugtoolbar",

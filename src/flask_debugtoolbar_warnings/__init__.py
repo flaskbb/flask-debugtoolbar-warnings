@@ -9,4 +9,4 @@
 """
 from .panel import WarningsPanel
 
-__version__ = "0.0.1.dev"
+__version__ = "0.1.0"
